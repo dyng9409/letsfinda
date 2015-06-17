@@ -3,19 +3,39 @@
 	<title>Letsfinda ...</title>
 	<head>
         <link rel="stylesheet" href="css/bootstrap.min.css">	
-	<link type='text/css' rel='stylesheet' href='lander.css' />
+	   <link type='text/css' rel='stylesheet' href='lander.css' />
 	
 	</head>
 	<body>
-	<a href=''>Letsfinda...</a>
-	<br>
+	
+<div class='container'>
+	           <nav>
+	            <a href=''>Letsfinda...</a>
+	<div align="right">            
+<a href="">About</a> |
+<a href="">Info</a> |
+<a href="">Contact</a> 
+</div>
+</nav>
+	            <br>
+	        </div>
+	        
 
-<div style="position: absolute; left: 0px; top: 0px; z-index:1"> 
-<img src="http://www.profitguide.com/wp-content/uploads/2013/01/Map-with-magnifying-glass.jpg" alt="" width="50%" height="20%" />
-		
-</div> 	
+
 		<form>
-						
+			
+			
+			<div class='dropdown'>
+			    <button class='btn btn-default dropdown-toggle' type='button' id='dropdownMenu1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true'>
+			    What?
+				    <span class='caret'></span>
+				</button>
+				<ul class='dropdown-menu' aria-labelledby='dropdownMenu1'>
+				    <li><a href='#'>one</a></li>
+					<li>two</li>
+					<li>three</li>
+				</ul>
+	        </div>			
 <tablestyle="width:100%">
  <tr>
     <td>Where?<input placeholder="Location" type ='text' name='place'></td>
@@ -23,7 +43,7 @@
     <td>Price?<input placeholder= "$" type ='text' name='money'></td>
 </tr>      
                                   	
-		     </table>
-		</form>
-	</body>
-</html>
+  </table>
+  </form>
+		
+	       

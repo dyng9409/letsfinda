@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+	<title>Letsfinda ...</title>
 	<head>
 	    <link type='text/css' rel='stylesheet' href='lander.css' />
 		<link type='text/css' rel='stylesheet' href='/bootstrap/css/bootstrap.css' />
@@ -8,14 +9,28 @@
         <script type='text/javascript' src='/bootstrap/js/npm.js'></script>
 		<title>Let's Find A...</title>
 	</head>
-	    <body>
-	        <div class='container'>
+	<body>
+	
+<div class='container'>
+	           <nav>
 	            <a href=''>Letsfinda...</a>
+	<div align="right">            
+<a href="">About</a> |
+<a href="">Info</a> |
+<a href="">Contact</a> 
+</div>
+</nav>
 	            <br>
 	        </div>
 	    <form>
 		    <div class='dropdown'>
 			    <button class='btn btn-default dropdown-toggle' type='button' id='dLabel' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+	        
+		<form>
+			
+			
+			<div class='dropdown'>
+			    <button class='btn btn-default dropdown-toggle' type='button' id='dropdownMenu1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true'>
 			    What?
 				    <span class='caret'></span>
 				</button>
@@ -24,11 +39,15 @@
 					<li>two</li>
 					<li>three</li>
 				</ul>
-	        </div>
-			Where? <br>
-			<input type ='text' name='place'><br>
-			When? <br>
-			<input type ='text' name='date'><br>
-	    </form>
-	</body>
-</html>
+	        </div>			
+<tablestyle="width:100%">
+ <tr>
+    <td>Where?<input placeholder="Location" type ='text' name='place'></td>
+    <td>When?<input  placeholder="Date" type ='text' name='date'></td>		
+    <td>Price?<input placeholder= "$" type ='text' name='money'></td>
+</tr>      
+                                  	
+  </table>
+  </form>
+		
+	       

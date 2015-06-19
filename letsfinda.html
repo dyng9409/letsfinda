@@ -5,27 +5,14 @@
 	 	<link type='text/css' rel='stylesheet' href='/bootstrap/css/bootstrap.css' />
 		<link type='text/css' rel='stylesheet' href='/bootstrap/css/bootstrap-theme.css' />
 	    <link type='text/css' rel='stylesheet' href='lander.css' />
-        <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
-       
+        <link type='text/css' rel='stylesheet' href='/bootstrap/css/bootstrap-datetimepicker.css' />
+
+        <script src='/bootstrap/js/moment.js'></script>       
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- 	    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script type='text/javascript' src='/bootstrap/js/bootstrap.js'></script>
-        <script type='text/javascript' src='/bootstrap/js/npm.js'></script>
+        <script type='text/javascript' src='/bootstrap/js/bootstrap-datetimepicker.min.js'></script>
 
-        <script>
-            $(document).ready(function() {
-                $('#dateinput').datetimepicker({pickTime: false, icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                    left: "fa fa-chevron-left",
-                    right: "fa fa-chevron-right"
-                    }
-                   });
-             });
-        </script>
-
+        
 		
 		<title>Let's Find A...</title>
 	</head>
@@ -82,8 +69,14 @@
     <td>
         <span class='glyphicon glyphicon-calendar'></span>
     <div class='btn-group'> 
-        <input type='text' class='form-control dropinput' id='dateinput' placeholder='Date' data-date-format='MM-DD-YYYY'></a>
+        <input type='text' class='form-control' id='dateinput' placeholder='Date' data-date-format='MM-DD-YYYY' />
     </div>
+    <script type='text/javascript'>
+        $(function() {
+                $('#dateinput').datetimepicker();
+                });
+    </script>
+        
     </td>
     <td>
         <span class='glyphicon glyphicon-usd'></span>

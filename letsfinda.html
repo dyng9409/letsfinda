@@ -11,6 +11,21 @@
  	    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script type='text/javascript' src='/bootstrap/js/bootstrap.js'></script>
         <script type='text/javascript' src='/bootstrap/js/npm.js'></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#dateinput').datetimepicker({pickTime: false, icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    left: "fa fa-chevron-left",
+                    right: "fa fa-chevron-right"
+                    }
+                   });
+             });
+        </script>
+
 		
 		<title>Let's Find A...</title>
 	</head>
@@ -53,14 +68,28 @@
 	        </td>				
 
     <td>
-        <div class="input-group" style="width:70px;height:10px">Where?&nbsp; 
-            <span class="input-group-addon" >
+    <span class='glyphicon glyphicon-globe'></span>
+    <div class='btn-group'>
+                <input  class='form-control dropinput' placeholder="Location" type ='text' name='place' style="width:200px !important;" ></a>
+        <!--<div class="input-group" style="width:70px;height:10px">-->
+            <!--<span class="input-group-addon" >
                 <span class="glyphicon glyphicon-globe"></span>
-            </span><input  placeholder="Location" type ='text' name='place' style="width:200px !important;">
+            </span>-->
+            <!--</div>-->
         </div>
     </td>
-    <td>When?&nbsp;<input  placeholder="Date" type ='text' name='date'></td>		
-    <td>Price?&nbsp;<input placeholder= "$" type ='text' name='money'></td>
+    <!--<td>When?&nbsp;<input  placeholder="Date" type ='text' name='date'></td>-->
+    <td>
+        <span class='glyphicon glyphicon-calendar'></span>
+    <div class='btn-group'> 
+        <input type='text' class='form-control dropinput' id='dateinput' placeholder='Date' data-date-format='MM-DD-YYYY'></a>
+    </div>
+    </td>
+    <td>
+        <span class='glyphicon glyphicon-usd'></span>
+    <div class='btn-group'>
+        <input class='form-control dropinput' placeholder= "Price" type ='text' name='money'></td>
+    </div>
  
 </tr>
 </table>

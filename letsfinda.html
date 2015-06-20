@@ -2,21 +2,35 @@
 <html>
 	<title>Letsfinda ...</title>
 	<head>
+        <!--utilizing the bootstrap framework-->
 	 	<link type='text/css' rel='stylesheet' href='/bootstrap/css/bootstrap.css' />
 		<link type='text/css' rel='stylesheet' href='/bootstrap/css/bootstrap-theme.css' />
 	    <link type='text/css' rel='stylesheet' href='lander.css' />
         <link type='text/css' rel='stylesheet' href='/bootstrap/css/bootstrap-datetimepicker.css' />
-
+        <!--date time picker sourced from:
+            http://eonasdan.github.io/bootstrap-datetimepicker/-->
         <script src='/bootstrap/js/moment.js'></script>       
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script type='text/javascript' src='/bootstrap/js/bootstrap.js'></script>
         <script type='text/javascript' src='/bootstrap/js/bootstrap-datetimepicker.min.js'></script>
+        <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places'></script>
+        <script>
+        var autocomplete;
+        var countryRestrict = {'country': 'us' };
+        function initialize() {
+            autocomplete = new google.maps.places.Autocomplete(
+                    (document.getElementById('autocomplete')),
+                    {
+                        types: ['(cities)'],
+                        componentRestrictions: countryRestrict
+                    });
+            google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
 
-        
-		
+        }  
+        </script>
 		<title>Let's Find A...</title>
 	</head>
-	<body>
+	<body onload='initialize()'>
         <nav>
             <div class='container'>
 	            <a href=''>Letsfinda...</a>
@@ -57,18 +71,12 @@
     <td>
     <span class='glyphicon glyphicon-globe'></span>
     <div class='btn-group'>
-                <input  class='form-control dropinput' placeholder="Location" type ='text' name='place' style="width:200px !important;" ></a>
-        <!--<div class="input-group" style="width:70px;height:10px">-->
-            <!--<span class="input-group-addon" >
-                <span class="glyphicon glyphicon-globe"></span>
-            </span>-->
-            <!--</div>-->
+        <input  id='autocomplete'  class='form-control dropinput' placeholder="Location" type ='text'  style="width:200px !important;" />
         </div>
     </td>
-    <!--<td>When?&nbsp;<input  placeholder="Date" type ='text' name='date'></td>-->
     <td>
         <span class='glyphicon glyphicon-calendar'></span>
-    <div class='btn-group'> 
+    <div id='locationField' class='btn-group'> 
         <input type='text' class='form-control' id='dateinput' placeholder='Date' data-date-format='MM-DD-YYYY' />
     </div>
     <script type='text/javascript'>

@@ -14,6 +14,8 @@
         <script type='text/javascript' src='/bootstrap/js/bootstrap.js'></script>
         <script type='text/javascript' src='/bootstrap/js/bootstrap-datetimepicker.min.js'></script>
         <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places'></script>
+
+        <!--google location autcomplete taken from google places api documentation-->
         <script>
         var autocomplete;
         var countryRestrict = {'country': 'us' };
@@ -24,9 +26,19 @@
                         types: ['(cities)'],
                         componentRestrictions: countryRestrict
                     });
-            google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
 
         }  
+        </script>
+        <script>
+            $.getUserInput = function() {
+                var loc = $('#autocomplete').val();
+                var dates = $('#dateinput').val();
+                var pr = $('#money').val();
+
+                $('#loca').text(loc);
+                $('#d').text(dates);
+                $('#price').text(pr);
+            }
         </script>
 		<title>Let's Find A...</title>
 	</head>
@@ -61,10 +73,9 @@
 			    What? 
 				    <span class='caret'></span>
 				</button>
-				<ul class='dropdown-menu' aria-labelledby='dLabel'>
-				    <li><a href=''>one</a></li>
-					<li>two</li>
-					<li>three</li>
+				<ul class='dropdown-menu' text-align='center' aria-labelledby='dLabel'>
+                    <li><span class='glyphicon glyphicon-glass'></span></li>
+                    <li><span class='glyphicon glyphicon-leaf'></span></li>
 				</ul>
 	        </td>				
 
@@ -89,14 +100,15 @@
     <td>
         <span class='glyphicon glyphicon-usd'></span>
     <div class='btn-group'>
-        <input class='form-control dropinput' placeholder= "Price" type ='text' name='money'></td>
+        <input class='form-control dropinput' placeholder= "Price" type ='text' id='money'></td>
     </div>
- 
+    <td>
+        <button class='btn btn-default' type='button' onclick='$.getUserInput()'>Find it!</button>
+    </td>
+
 </tr>
 </table>
        <br><hr>                     	
   </form> 
-
 </body>
-
 </html>	           

@@ -5,5 +5,8 @@ html {
 a {
 				font-family: Lucide Sans Unicode, sans-serif;
 				font-size: 2em;
-				text-decoration: none;
+				text-decoration: none
 }	
+a:hover {
+    text-decoration: none
+}

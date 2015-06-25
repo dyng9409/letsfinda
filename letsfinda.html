@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <link rel='icon' type='image/jpg' href= 'letsfinda.jpg'>
 	<title>Letsfinda ...</title>
 	<head>
         <!--utilizing the bootstrap framework-->
@@ -43,12 +44,12 @@
 		<title>Let's Find A...</title>
 	</head>
 	<body onload='initialize()'>
-        <nav>
+      <nav>
             <div class='container'>
 	            <a href=''>Letsfinda...</a>
                 <ul class='nav navbar-nav navbar-right'>
                     <li><a href='AboutLetsfindA.html'>About</a></li>
-                    <li><a href="">Info</a></li>
+                    <li id='flat'><a href="">Info</a></li>
                     <li><div class="dropdown">
     <button class="btn btn-default dropdown-toggle" type="button" id='flat2' id="menu1" data-toggle="dropdown" style= "border: 0"><a href="">Contact</a>
     <span class="caret"></span></button>
@@ -65,7 +66,7 @@
 	        </div>
         </nav>
 <hr><br>
-		<form >
+		<form action>
 
  <table  align="center" style= "width:80%">
  <tr><td><div class='dropdown' align='left'>
@@ -100,7 +101,7 @@
     <td>
         <span class='glyphicon glyphicon-usd'></span>
     <div class='btn-group'>
-        <input class='form-control dropinput' placeholder= "Price" type ='text' id='money'></td>
+        <input class='form-control dropinput' placeholder= "Price" type="number" min="0.00" step="0.01"  style= "width:50%" id='money'></td>
     </div>
     <td>
         <button  type="button" id="flat" class='btn btn-default' onclick='$.getUserInput()'>Find it!</button>
@@ -109,6 +110,16 @@
 </tr>
 </table>
        <br><hr>                     	
-  </form> 
+  </form>
+
+
+
+  <div id="footer"> 
+  <!-- begin htmlcommentbox.com -->
+ <div  id="HCB_comment_box" ><a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
+ <link rel="stylesheet" type="text/css" href="http://www.htmlcommentbox.com/static/skins/default/skin.css" />
+ <script type="text/javascript" language="javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={  };} (function(){s=document.createElement("script");s.setAttribute("type","text/javascript");s.setAttribute("src", "http://www.htmlcommentbox.com/jread?page="+escape((window.hcb_user && hcb_user.PAGE)||(""+window.location)).replace("+","%2B")+"&opts=470&num=10");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+<!-- end htmlcommentbox.com -->
+</div>
 </body>
 </html>	           

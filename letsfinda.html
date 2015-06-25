@@ -3,16 +3,16 @@
 	<title>Letsfinda ...</title>
 	<head>
         <!--utilizing the bootstrap framework-->
-	 	<link type='text/css' rel='stylesheet' href='/bootstrap/css/bootstrap.css' />
-		<link type='text/css' rel='stylesheet' href='/bootstrap/css/bootstrap-theme.css' />
+	 	<link type='text/css' rel='stylesheet' href='bootstrap/css/bootstrap.css' />
+		<link type='text/css' rel='stylesheet' href='bootstrap/css/bootstrap-theme.css' />
 	    <link type='text/css' rel='stylesheet' href='lander.css' />
-        <link type='text/css' rel='stylesheet' href='/bootstrap/css/bootstrap-datetimepicker.css' />
+        <link type='text/css' rel='stylesheet' href='bootstrap/css/bootstrap-datetimepicker.css' />
         <!--date time picker sourced from:
             http://eonasdan.github.io/bootstrap-datetimepicker/-->
-        <script src='/bootstrap/js/moment.js'></script>       
+        <script src='bootstrap/js/moment.js'></script>       
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script type='text/javascript' src='/bootstrap/js/bootstrap.js'></script>
-        <script type='text/javascript' src='/bootstrap/js/bootstrap-datetimepicker.min.js'></script>
+        <script type='text/javascript' src='bootstrap/js/bootstrap.js'></script>
+        <script type='text/javascript' src='bootstrap/js/bootstrap-datetimepicker.min.js'></script>
         <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places'></script>
 
         <!--google location autcomplete taken from google places api documentation-->
@@ -35,10 +35,81 @@
                 var dates = $('#dateinput').val();
                 var pr = $('#money').val();
 
-                $('#loca').text(loc);
-                $('#d').text(dates);
-                $('#price').text(pr);
+                var pos = autocomplete.getPlace().geometry.location;
+				var lon = pos.lng();
+				var lat = pos.lat();
+				alert(lat);
+				alert(lon);
+
+						$.ajax({
+								type: "POST",
+								url: 'requestHandler.php',
+								dataType: "text",
+								data: {
+									"LFA_TRANX_ID" :"GET_GROUPON_DATA",
+									"LAT" :lat,
+									"LON" :lon},
+								beforeSend: function() {
+									
+								},
+								success: function(data)  {
+									
+								}
+								}).done(function( results ) {
+									
+									grouponobj = $.parseJSON(results);
+									
+									console.log(grouponobj);
+									console.log("flag");
+									display_content(grouponobj);
+							});
+
+						
             }
+			
+			
+			function display_content(object)
+			{
+			
+				var array = object;
+				var MainDiv = '<div class="row">';
+				var curRow = 0;
+				for(i=0;i<object.length;i++)
+				{
+					
+					if((i) % 3 == 0 && i!=0 )
+					{
+						MainDiv +='</div><div class="row">';
+						curRow+=1;
+						
+					}
+				
+					var obj = array[i];
+					var obj_merchant = obj.merchant;
+					var name = obj_merchant.name;
+					var array_options = obj.options;
+					
+					
+					MainDiv+='<div class="col-sm-4" id="col'+i+'"><h4>'+name+'</h4>';
+					MainDiv+='<table class="table table-striped"><thead><tr><th>Details</th><th>Price</th><th>Discount</th></tr></thead><tbody>';
+					for(c=0;c<array_options.length;c++)
+					{
+						obj_option = array_options[c];
+						var title = obj_option.title;
+						var discount = obj_option.discount.formattedAmount;
+						var price = obj_option.price.formattedAmount;
+						var buy_url = obj_option.buyUrl;
+						MainDiv+='<tr><td>'+title+'</td><td>'+discount+'</td><td>'+price+'</td><td><a href="'+buy_url+'" target="_blank"><div class="btn btn-default" target="_blank">GO</div></a></td></tr>';
+						
+					}
+					
+					MainDiv+='</tbody></table></div>';
+				
+				}
+				$('#put_stuff').append(MainDiv);
+			
+			
+			}
         </script>
 		<title>Let's Find A...</title>
 	</head>
@@ -110,5 +181,8 @@
 </table>
        <br><hr>                     	
   </form> 
+  <div class="container" id="put_stuff">
+	
+  </div>
 </body>
 </html>	           

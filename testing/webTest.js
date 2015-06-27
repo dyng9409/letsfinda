@@ -6,7 +6,7 @@ module.exports = {
             .type('#autocomplete', 'Denver, CO, United States')
             .assert.val('#autocomplete', 'Denver, CO, United States', 'Text Field AcceptS Input')
             .click('#dateinput')
-            .assert.val('#dateinput', '06-25-2015', 'Date Field Populates')
+            .assert.val('#dateinput', '06-26-2015', 'Date Field Populates')
             .type('#money', '10.00')
             .assert.val('#money', '10.00', 'Price Field Populates')
             .sendKeys('#money','\uE013')

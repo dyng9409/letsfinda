@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-    <link rel='icon' type='image/jpg' href= 'letsfinda.jpg'>
 	<title>Letsfinda ...</title>
 	<head>
         <!--utilizing the bootstrap framework-->
@@ -39,8 +38,6 @@
                 var pos = autocomplete.getPlace().geometry.location;
 				var lon = pos.lng();
 				var lat = pos.lat();
-				alert('Location Accepted');
-
 						$.ajax({
 								type: "POST",
 								url: 'requestHandler.php',
@@ -56,12 +53,17 @@
 									
 								}
 								}).done(function( results ) {
+									console.log(results);
 									
+								try {
 									grouponobj = $.parseJSON(results);
-									
-									console.log(grouponobj);
-									console.log("flag");
 									display_content(grouponobj);
+									getFourSquareMarkers(fsobj,position,dateobj);
+									} catch (e) {
+									alert('bad json foursquare');
+									}
+									
+									
 							});
 
 						
@@ -88,38 +90,66 @@
 					var obj_merchant = obj.merchant;
 					var name = obj_merchant.name;
 					var array_options = obj.options;
+					var image = obj.image;
 					
 					
-					MainDiv+='<div class="col-sm-4" id="col'+i+'"><h4>'+name+'</h4>';
-					MainDiv+='<table class="table table-striped"><thead><tr><th>Details</th><th>Price</th><th>Discount</th></tr></thead><tbody>';
+					MainDiv+='<div class="col-sm-4" id="col'+i+'" ><h4>'+name+'</h4><img class="img-responsive" src="'+image+'"></img>';
+					MainDiv+='<div style="min-height:300px;max-height:300px;overflow:auto;"><table class="table table-striped"><thead><tr><th>Details</th><th>Price</th><th>Discount</th></tr></thead><tbody>';
+					var gCT = false;
 					for(c=0;c<array_options.length;c++)
 					{
 						obj_option = array_options[c];
 						var title = obj_option.title;
-						var discount = obj_option.discount.formattedAmount;
+						var discount = obj_option.discountPercent;
 						var price = obj_option.price.formattedAmount;
 						var buy_url = obj_option.buyUrl;
-						MainDiv+='<tr><td>'+title+'</td><td>'+discount+'</td><td>'+price+'</td><td><a href="'+buy_url+'" target="_blank"><div class="btn btn-default" target="_blank">GO</div></a></td></tr>';
+						var redemptionLocations = obj_option.redemptionLocations;
+						
+						if(redemptionLocations.length > 0)
+						{
+							gCT = true;
+							var googleImageurlString = 'https://maps.googleapis.com/maps/api/staticmap?center=';
+							var lat = redemptionLocations[0].lat;
+							var lon = redemptionLocations[0].lng;
+							googleImageurlString += lat+','+lon+'&zoom=13&size=200x200&maptype=roadmap';
+							for(b=0;b<redemptionLocations.length;b++)
+							{
+								var latC = redemptionLocations[b].lat;
+								var lonC = redemptionLocations[b].lng;
+								googleImageurlString+= '&markers=color:blue%7Clabel:%7C';
+								googleImageurlString+= latC+','+lonC;
+							
+							}
+						}
+						
+						MainDiv+='<tr><td>'+title+'</td><td>'+price+'</td><td>'+discount+'%</td><td><a href="'+buy_url+'" target="_blank"><div class="btn btn-default" target="_blank">GO</div></a></td></tr>';
 						
 					}
-					
-					MainDiv+='</tbody></table></div>';
+					if(gCT == true)
+					{
+						MainDiv+='</tbody></table></div></div>';
+					}else
+					{
+						MainDiv+='</tbody></table></div></div>';
+					}
+			
+					console.log(googleImageurlString);
 				
 				}
 				$('#put_stuff').append(MainDiv);
-			
+				
 			
 			}
         </script>
 		<title>Let's Find A...</title>
 	</head>
 	<body onload='initialize()'>
-      <nav>
+        <nav>
             <div class='container'>
 	            <a href=''>Letsfinda...</a>
                 <ul class='nav navbar-nav navbar-right'>
                     <li><a href='AboutLetsfindA.html'>About</a></li>
-                    <li id='flat'><a href="">Info</a></li>
+                    <li><a href="">Info</a></li>
                     <li><div class="dropdown">
     <button class="btn btn-default dropdown-toggle" type="button" id='flat2' id="menu1" data-toggle="dropdown" style= "border: 0"><a href="">Contact</a>
     <span class="caret"></span></button>
@@ -136,7 +166,7 @@
 	        </div>
         </nav>
 <hr><br>
-		<form action>
+		<form >
 
  <table  align="center" style= "width:80%">
  <tr><td><div class='dropdown' align='left'>
@@ -171,7 +201,7 @@
     <td>
         <span class='glyphicon glyphicon-usd'></span>
     <div class='btn-group'>
-        <input class='form-control dropinput' placeholder= "Price" type="number" min="0.00" step="0.01"  style= "width:50%" id='money'></td>
+        <input class='form-control dropinput' placeholder= "Price" type ='text' id='money'></td>
     </div>
     <td>
         <button  type="button" id="flat" class='btn btn-default' onclick='$.getUserInput()'>Find it!</button>

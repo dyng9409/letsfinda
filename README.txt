@@ -1,3 +1,10 @@
+Letsfinda is a project designed to help users find the best deals in the area based on location and 
+date. In addition to providing links to the deals, we also provide maps from Google so that users
+can more easily find their way.
+
+
+REPO DETAILS:
+
 javascript and css files are located in the bootstrap directory
 php directory contains test files
 partX directories contain various pdfs and files relating to project parts
